@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Map, BookOpen, Accessibility, GitCommitHorizontal,
-  Users, FileText, Vote, HelpCircle, MapPin
+  Users, FileText, Vote, HelpCircle, MapPin, Sparkles
 } from "lucide-react";
 import styles from "./DeepDivePanel.module.css";
 
@@ -19,9 +19,11 @@ const BallotZip           = dynamic(() => import("./BallotZip"));
 const VotingMethods       = dynamic(() => import("./VotingMethods"));
 const FAQ                 = dynamic(() => import("./FAQ"));
 const PollingPlaceMap     = dynamic(() => import("./PollingPlaceMap"), { loading: () => <div className={styles.loadingContainer}>Initializing Google Maps...</div> });
+const CivicConcierge      = dynamic(() => import("./CivicConcierge"));
 
 const TABS = [
   { id: "map",       Icon: MapPin,              label: "Map",       Component: PollingPlaceMap },
+  { id: "ai",        Icon: Sparkles,            label: "Intelligence", Component: CivicConcierge },
   { id: "ballot",    Icon: FileText,            label: "Ballot",    Component: BallotZip },
   { id: "methods",   Icon: Vote,                label: "How to",    Component: VotingMethods },
   { id: "faq",       Icon: HelpCircle,          label: "FAQ",       Component: FAQ },
@@ -29,7 +31,6 @@ const TABS = [
   { id: "terms",     Icon: BookOpen,            label: "Terms",     Component: TerminologyTooltips },
   { id: "access",    Icon: Accessibility,       label: "Access",    Component: AccessibilityGuide },
   { id: "lifecycle", Icon: GitCommitHorizontal, label: "Lifecycle", Component: VoteLifecycle },
-  { id: "steward",   Icon: Users,               label: "Volunteer", Component: CommunitySteward },
 ];
 
 export default function DeepDivePanel() {
