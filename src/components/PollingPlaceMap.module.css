@@ -1,0 +1,218 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.icon { color: var(--accent-cyan); }
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Shared state card ── */
+.stateCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: var(--space-md);
+  border: 1px dashed var(--glass-border);
+  border-radius: 12px;
+  background: rgba(0,0,0,0.15);
+}
+
+.navIcon   { color: var(--accent-cyan); opacity: 0.8; }
+.loaderIcon { color: var(--accent-cyan); }
+.alertIcon { color: rgba(255, 170, 80, 0.8); }
+
+.stateTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stateBody {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 240px;
+}
+
+.code {
+  font-family: var(--font-mono);
+  background: rgba(255,255,255,0.08);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  color: var(--accent-cyan);
+}
+
+.codeBlock {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: rgba(168,255,120,0.9);
+  width: 100%;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.link {
+  color: var(--accent-purple);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-size: 0.75rem;
+}
+
+.locateBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--accent-cyan);
+  color: black;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.locateBtn:hover {
+  background: white;
+  box-shadow: 0 0 16px rgba(0,242,254,0.5);
+}
+
+.privacyNote {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-mono);
+}
+
+/* ── Map wrapper ── */
+.mapWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  position: relative;
+  min-height: 0;
+}
+
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 12, 40, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  border-radius: 12px;
+}
+
+.shimmerBar {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(79, 172, 254, 0.08),
+    transparent
+  );
+}
+
+.mapFrame {
+  flex: 1;
+  width: 100%;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 12px 12px 0 0;
+  min-height: 0;
+}
+
+.mapVisible { opacity: 1; }
+
+/* ── Action bar ── */
+.mapActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.75rem;
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.coordText {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.actionBtns {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.refreshBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.refreshBtn:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text-primary);
+}
+
+.directionsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  background: rgba(0,242,254,0.1);
+  border: 1px solid rgba(0,242,254,0.25);
+  color: var(--accent-cyan);
+  font-size: 0.7rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.directionsBtn:hover {
+  background: var(--accent-cyan);
+  color: black;
+}

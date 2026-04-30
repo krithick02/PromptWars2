@@ -1,0 +1,156 @@
+.sandboxContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sandboxHeader {
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.workspace {
+  display: flex;
+  gap: var(--space-md);
+  flex: 1;
+}
+
+.column {
+  flex: 1;
+  transition: filter var(--transition-glide);
+}
+
+.blurred {
+  filter: blur(4px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-mono);
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.optionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.optionBtn {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.optionBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.optionBtn.active {
+  background: rgba(79, 172, 254, 0.1);
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 10px rgba(79, 172, 254, 0.2);
+}
+
+.optionBtn.activeSelection {
+  background: rgba(0, 242, 254, 0.1);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+}
+
+.optionBtn:disabled {
+  cursor: not-allowed;
+}
+
+.emptyState {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.75rem 0;
+  opacity: 0.5;
+}
+
+.confirmation {
+  margin-top: auto;
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+}
+
+.logText {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.checkIcon {
+  color: var(--accent-cyan);
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.cyanText {
+  color: var(--accent-cyan);
+}
+
+.castBtn {
+  background: var(--accent-cyan);
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.castBtn:hover {
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+}
+
+.resetBtn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.resetBtn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}

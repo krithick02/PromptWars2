@@ -1,0 +1,130 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.iconContainer {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconIdle {
+  color: var(--text-secondary);
+}
+
+.iconActive {
+  color: var(--accent-purple);
+}
+
+.textContainer {
+  flex: 1;
+}
+
+.title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.toggle {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background-color: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.toggleActive {
+  background-color: var(--accent-purple);
+  box-shadow: 0 0 10px rgba(79, 172, 254, 0.4);
+}
+
+.toggleKnob {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.toggleActive .toggleKnob {
+  transform: translateX(18px);
+}
+
+.inputSection {
+  margin-top: var(--space-md);
+}
+
+.form {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.input {
+  flex: 1;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  color: white;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent-cyan);
+}
+
+.submitBtn {
+  background: rgba(255,255,255,0.1);
+  width: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--accent-cyan);
+  color: black;
+}
+
+.successMessage {
+  margin-top: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+}

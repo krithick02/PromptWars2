@@ -1,0 +1,54 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: rgba(255,255,255,0.9);
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.mapWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+}
+
+.room {
+  fill: rgba(255,255,255,0.02);
+  stroke: rgba(255,255,255,0.1);
+  stroke-width: 1;
+}
+
+.station {
+  fill: rgba(79,172,254,0.08);
+  stroke: rgba(79,172,254,0.2);
+  stroke-width: 1;
+}
+
+.stationLabel {
+  fill: rgba(255,255,255,0.5);
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.stationDot {
+  fill: rgba(79,172,254,0.4);
+  stroke: rgba(79,172,254,0.6);
+  stroke-width: 1;
+}
