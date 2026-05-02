@@ -11,16 +11,6 @@ type Status = "idle" | "locating" | "ready" | "no-key" | "error";
 interface Coords { lat: number; lng: number }
 
 
-function buildEmbedUrl(coords: Coords) {
-  const center = `${coords.lat},${coords.lng}`;
-  return (
-    `https://www.google.com/maps/embed/v1/search` +
-    `?key=${API_KEY}` +
-    `&q=polling+place+voting+location` +
-    `&center=${center}` +
-    `&zoom=13`
-  );
-}
 
 function buildDirectionsUrl(coords: Coords) {
   return (
@@ -33,7 +23,6 @@ export default function PollingPlaceMap() {
   const HAS_KEY = API_KEY.length > 10 && API_KEY !== "YOUR_GOOGLE_MAPS_API_KEY_HERE";
   const [status, setStatus]   = useState<Status>(HAS_KEY ? "idle" : "no-key");
   const [coords, setCoords]   = useState<Coords | null>(null);
-  const [iframeReady, setIframeReady] = useState(false);
 
   const handleLocate = () => {
     if (!navigator.geolocation) { setStatus("error"); return; }
@@ -42,7 +31,6 @@ export default function PollingPlaceMap() {
       pos => {
         setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setStatus("ready");
-        setIframeReady(false);
       },
       () => setStatus("error"),
       { timeout: 10000 }
@@ -140,16 +128,7 @@ export default function PollingPlaceMap() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            {/* Loading shimmer behind iframe */}
-            {!iframeReady && (
-              <div className={styles.shimmer}>
-                <motion.div
-                  className={styles.shimmerBar}
-                  animate={{ x: ["-100%", "200%"] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
-            )}
+            <div className={styles.shimmer}></div>
 
             <GoogleMapsEmbed
               apiKey={API_KEY}
@@ -159,8 +138,7 @@ export default function PollingPlaceMap() {
               q="polling place voting location"
               center={`${coords.lat},${coords.lng}`}
               zoom="13"
-              onLoad={() => setIframeReady(true)}
-              style={`border-radius: 12px; border: none; ${iframeReady ? "opacity: 1" : "opacity: 0"}`}
+              style="border-radius: 12px; border: none;"
             />
             {/* Action bar below map */}
             <div className={styles.mapActions}>
