@@ -3,14 +3,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigation, MapPin, ExternalLink, AlertCircle, Loader } from "lucide-react";
+import { GoogleMapsEmbed } from "@next/third-parties/google";
 import styles from "./PollingPlaceMap.module.css";
 
 type Status = "idle" | "locating" | "ready" | "no-key" | "error";
 
 interface Coords { lat: number; lng: number }
 
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
-const HAS_KEY  = API_KEY.length > 10 && API_KEY !== "YOUR_GOOGLE_MAPS_API_KEY_HERE";
 
 function buildEmbedUrl(coords: Coords) {
   const center = `${coords.lat},${coords.lng}`;
@@ -30,6 +29,8 @@ function buildDirectionsUrl(coords: Coords) {
 }
 
 export default function PollingPlaceMap() {
+  const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
+  const HAS_KEY = API_KEY.length > 10 && API_KEY !== "YOUR_GOOGLE_MAPS_API_KEY_HERE";
   const [status, setStatus]   = useState<Status>(HAS_KEY ? "idle" : "no-key");
   const [coords, setCoords]   = useState<Coords | null>(null);
   const [iframeReady, setIframeReady] = useState(false);
@@ -150,16 +151,17 @@ export default function PollingPlaceMap() {
               </div>
             )}
 
-            <iframe
-              title="Polling Places Map"
-              src={buildEmbedUrl(coords)}
-              className={`${styles.mapFrame} ${iframeReady ? styles.mapVisible : ""}`}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+            <GoogleMapsEmbed
+              apiKey={API_KEY}
+              height={400}
+              width="100%"
+              mode="search"
+              q="polling place voting location"
+              center={`${coords.lat},${coords.lng}`}
+              zoom="13"
               onLoad={() => setIframeReady(true)}
+              style={`border-radius: 12px; border: none; ${iframeReady ? "opacity: 1" : "opacity: 0"}`}
             />
-
             {/* Action bar below map */}
             <div className={styles.mapActions}>
               <span className={styles.coordText}>

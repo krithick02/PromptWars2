@@ -1,10 +1,26 @@
 "use client";
 
-import { memo } from "react";
+import { Suspense, memo } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Calendar, MapPin, CheckCircle2, Loader2 } from "lucide-react";
 import styles from "./page.module.css";
 
+import LanguageSelector from "../components/LanguageSelector";
+import { useDashboardState } from "../hooks/useDashboardState";
+
+// Dynamic imports for heavy components
+const CivicConcierge = dynamic(() => import("../components/CivicConcierge"), {
+  loading: () => <div className={styles.skeleton}>Loading Intelligence...</div>,
+  ssr: false
+});
+
+const PollingPlaceMap = dynamic(() => import("../components/PollingPlaceMap"), {
+  loading: () => <div className={styles.skeleton}>Loading Geospatial Map...</div>,
+  ssr: false
+});
+
+// Other components
 import QuietNotifier from "../components/QuietNotifier";
 import MythRealityCards from "../components/MythRealityCards";
 import BallotSandbox from "../components/BallotSandbox";
@@ -12,7 +28,6 @@ import DeepDivePanel from "../components/DeepDivePanel";
 import StateSelector from "../components/StateSelector";
 import ElectionCalendar from "../components/ElectionCalendar";
 import CivicConfidenceScore from "../components/CivicConfidenceScore";
-import { useDashboardState } from "../hooks/useDashboardState";
 
 // Memoize components for performance
 const MemoizedMythRealityCards = memo(MythRealityCards);
@@ -49,6 +64,7 @@ export default function Home() {
         <h1 className={styles.title}>ELECTION // SYS</h1>
         <div className={styles.headerCenter}>
           <StateSelector selected={selectedState} onSelect={setSelectedState} />
+          <LanguageSelector />
         </div>
         <div className={styles.countdownArea}>
           <span className={styles.countdownLabel}>
@@ -146,6 +162,16 @@ export default function Home() {
               </section>
               <section className={`glass-panel ${styles.bentoNotifier}`} aria-label="Alerts Configuration">
                 <MemoizedQuietNotifier onEnable={() => setNotifierOn(true)} />
+              </section>
+              <section className={`glass-panel ${styles.bentoConcierge}`} aria-label="AI Civic Concierge">
+                <Suspense fallback={<Loader2 className="animate-spin" />}>
+                  <CivicConcierge />
+                </Suspense>
+              </section>
+              <section className={`glass-panel ${styles.bentoMap}`} aria-label="Polling Place Map">
+                <Suspense fallback={<Loader2 className="animate-spin" />}>
+                  <PollingPlaceMap />
+                </Suspense>
               </section>
             </motion.div>
           ) : (

@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { z } from "zod";
 import { STATE_DATA } from "../components/StateSelector";
 
 const STEPS = [
@@ -18,6 +19,9 @@ const WEIGHTS = {
 };
 
 const FALLBACK_DEADLINE = new Date("2026-11-03T00:00:00");
+
+const StateSchema = z.string().nullable();
+const StepSchema = z.number().min(0).max(STEPS.length - 1);
 
 export function useDashboardState() {
   const [activeStep, setActiveStep]         = useState<number>(0);
@@ -55,16 +59,25 @@ export function useDashboardState() {
     return { score: s, achieved: hits };
   }, [selectedState, completedSteps, sandboxCast, checklistAll, notifierOn]);
 
-  const handleCompleteStep = (e: React.MouseEvent, index: number) => {
+  const handleCompleteStep = useCallback((e: React.MouseEvent, index: number) => {
     e.stopPropagation();
-    if (!completedSteps.includes(index)) setCompletedSteps(prev => [...prev, index]);
-    if (index < STEPS.length - 1) setActiveStep(index + 1);
-  };
+    const validatedIndex = StepSchema.parse(index);
+    setCompletedSteps(prev => {
+      if (!prev.includes(validatedIndex)) return [...prev, validatedIndex];
+      return prev;
+    });
+    if (validatedIndex < STEPS.length - 1) setActiveStep(validatedIndex + 1);
+  }, [completedSteps]);
+
+  const updateSelectedState = useCallback((state: string | null) => {
+    setSelectedState(StateSchema.parse(state));
+  }, []);
+
 
   return {
     activeStep, setActiveStep,
     completedSteps,
-    selectedState, setSelectedState,
+    selectedState, setSelectedState: updateSelectedState,
     sandboxCast, setSandboxCast,
     checklistAll, setChecklistAll,
     notifierOn, setNotifierOn,
